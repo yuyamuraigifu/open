@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <title>ハッピーホワイトデー！！！</title>
+
+  <style>
+    body {
+      font-family: "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+      background: linear-gradient(135deg, #ffe6f2, #e6f7ff);
+      margin: 0;
+      padding: 20px;
+      color: #333;
+      text-align: center;
+    }
+
+    h1 {
+      color: #ff4da6;
+      font-size: 40px;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(255, 0, 128, 0.2);
+    }
+
+    h2 {
+      color: #0066cc;
+      margin-top: 30px;
+      font-size: 22px;
+    }
+
+    input {
+      padding: 10px;
+      width: 250px;
+      border-radius: 10px;
+      border: 2px solid #ff99cc;
+      font-size: 16px;
+      margin-top: 10px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #ff4da6;
+      background: #fff0f7;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 10px;
+      background: #ff66b3;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ff3385;
+      transform: scale(1.05);
+    }
+
+    #finalURL {
+      margin-top: 40px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #cc0066;
+    }
+
+    a {
+      color: #0066cc;
+      font-size: 22px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #004d99;
+    }
+
+    .result {
+      font-size: 18px;
+      margin-top: 5px;
+      font-weight: bold;
+    }
+
+    .correct {
+      color: #00b33c;
+    }
+
+    .wrong {
+      color: #cc0000;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>💝 ハッピーホワイトデー！！！ 💝</h1>
+  <h2>全問正解したら3/21のデート場所がわかるよ！</h2>
+
+  <!-- 問題 1 -->
+  <h2>問題 1：初めて会った日に行ったご飯屋さんはどこでしょうか？</h2>
+  <input id="flag1" type="text" />
+  <button onclick="handle1()">Check</button>
+  <div id="result1" class="result"></div>
+
+  <!-- 問題 2 -->
+  <h2>問題 2：四国旅行で二人が初めて挑戦したマリンスポーツは？</h2>
+  <input id="flag2" type="text" />
+  <button onclick="handle2()">Check</button>
+  <div id="result2" class="result"></div>
+
+  <!-- 問題 3 -->
+  <h2>問題 3：みくちゃんがもらって一番うれしい食べ物は？</h2>
+  <input id="flag3" type="text" />
+  <button onclick="handle3()">Check</button>
+  <div id="result3" class="result"></div>
+
+    <!-- 問題 4 -->
+  <h2>問題 4：192.168.10.8/29のブロードキャストアドレスは？</h2>
+  <input id="flag4" type="text" />
+  <button onclick="handle4()">Check</button>
+  <div id="result4" class="result"></div>
+
+  <!-- 問題 5 -->
+  <h2>問題 5：ドバイチョコのフレーバーは？</h2>
+  <input id="flag5" type="text" placeholder="○○味" />
+  <button onclick="handle5()">Check</button>
+  <div id="result5" class="result"></div>
+
+  <!-- 問題 6 -->
+  <h2>問題 6：みくちゃんの好きな人が持っているギターのメーカーは？</h2>
+  <input id="flag6" type="text" />
+  <button onclick="handle6()">Check</button>
+  <div id="result6" class="result"></div>
+
+  <div id="finalURL"></div>
+
+ 
+
+<script>
+  // 入力を完全正規化する関数
+  function norm(str) {
+    return str
+      .normalize("NFKC")
+      .replace(/\s+/g, "")
+      .replace(/\u200B/g, "")
+      .trim();
+  }
+
+  function setResult(id, ok) {
+    const el = document.getElementById(id);
+    el.textContent = ok ? "正解！！！" : "惜しい～～。もう一回考えてみて！";
+    el.className = ok ? "result correct" : "result wrong";
+  }
+
+  function checkAllClear() {
+    const results = ["result1", "result2", "result3", "result4", "result5", "result6"]
+      .map(id => document.getElementById(id).textContent);
+
+    if (results.every(r => r === "正解！！！")) {
+      document.getElementById("finalURL").innerHTML =
+        '🎉 全問正解！<br><a href="https://osaka.artbar.co.jp/events/white-roses26032111/" target="_blank" rel="noopener noreferrer">3/21はここに行くよん！</a>';
+    }
+  }
+
+  function handle1() {
+    const v = norm(document.getElementById("flag1").value);
+    setResult("result1",
+      v === norm("Egg's things") ||
+      v === norm("エッグスシングス") ||
+      v === norm("エッグシングス") ||
+      v === norm("エッグシング")
+    );
+    checkAllClear();
+  }
+
+  function handle2() {
+    const v = norm(document.getElementById("flag2").value);
+    setResult("result2",
+      v === norm("サーフィン") ||
+      v === norm("surfing")
+    );
+    checkAllClear();
+  }
+
+  function handle3() {
+    const v = norm(document.getElementById("flag3").value);
+    setResult("result3",
+      v === norm("蟹味噌") ||
+      v === norm("カニみそ") ||
+      v === norm("かにみそ")
+    );
+    checkAllClear();
+  }
+
+  function handle4() {
+    const v = norm(document.getElementById("flag4").value);
+    setResult("result4", v === norm("192.168.10.15"));
+    checkAllClear();
+  }
+
+  function handle5() {
+    const v = norm(document.getElementById("flag5").value);
+    setResult("result5", v === norm("ピスタチオ味"));
+    checkAllClear();
+  }
+
+  function handle6() {
+    const v = norm(document.getElementById("flag6").value);
+    setResult("result6",
+      v === norm("グレッチ") ||
+      v === norm("GRETSCH") ||
+      v === norm("Gretsch")
+    );
+    checkAllClear();
+  }
+</script>
+
+</body>
+</html>
